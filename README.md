@@ -1,2 +1,1 @@
-# human_benchmark_script
-automation for [https://humanbenchmark.com/] tests
+# Automation scripts for [human benchmark] (https://humanbenchmark.com/) tests
