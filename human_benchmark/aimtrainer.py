@@ -27,7 +27,8 @@ while targets_hit < 31:
     width, height = pic.size
     flag = False  # used to break the loops when a target is found
 
-    # iterate over the screenshot height and width with steps of 20 pixels
+    # iterate over the screenshot height and width with steps of 20 pixels because iterating through 1 for fastest detection makes it too slow
+    # 20 is the sweet spot because the target is massive
     for w in range(0, width, 20):
         for h in range(0, height, 20):
 
