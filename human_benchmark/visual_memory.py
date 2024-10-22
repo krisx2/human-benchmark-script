@@ -1,25 +1,22 @@
 import time
-
 import pyautogui
-from win32api import mouse_event, SetCursorPos
-from win32con import MOUSEEVENTF_LEFTDOWN, MOUSEEVENTF_LEFTUP
+from pynput.mouse import Controller,Button
+
+mouse = Controller()
 
 
 def click(x, y):
-    SetCursorPos((x, y))
-    mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0)
-    mouse_event(MOUSEEVENTF_LEFTUP, 0, 0)
+    mouse.position = (x, y)
+    mouse.click(Button.left, 1)
 
 
 limit = 50
-
 image = None
 
 click(954, 558)
 time.sleep(1)
 
-
-for x in range(0, limit):
+for _ in range(limit):
 
     image = pyautogui.screenshot(region=(750, 259, 400, 400))
 
@@ -27,7 +24,7 @@ for x in range(0, limit):
 
     for i in range(0, 400, 20):
         for j in range(0, 400, 20):
-            if image.getpixel((i, j)) == (255, 255, 255):
+            if image.getpixel((i, j)) == (255, 255, 255):  # gets the colour of the pixel
                 click(i + 750, j + 259)
 
     time.sleep(2)

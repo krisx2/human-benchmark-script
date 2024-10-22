@@ -12,12 +12,12 @@ browser.get("https://humanbenchmark.com/tests/typing")
 
 keyboard.wait(start_button)
 
-elements = browser.find_elements(By.CLASS_NAME, "incomplete")
+letters = browser.find_elements(By.CLASS_NAME, "incomplete")
 
 text = ""
-for element in elements:
-    element_text = element.text
-    text += element_text if len(element_text) > 0 else ' '
+for letter in letters:
+    letter_text = letter.text
+    text += letter_text if len(letter_text) > 0 else ' '
 
 
 keyboard.write(text)

@@ -1,18 +1,14 @@
 import time
 import pyautogui
-from win32con import MOUSEEVENTF_LEFTDOWN, MOUSEEVENTF_LEFTUP
-from win32api import mouse_event, SetCursorPos
+from pynput.mouse import Controller,Button
 
-
-
-def click(x, y):
-    SetCursorPos((x, y))
-    mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0)
-    mouse_event(MOUSEEVENTF_LEFTUP, 0, 0)
+mouse = Controller()
+def click(x,y):
+    mouse.position = (x, y)
+    mouse.click(Button.left, 1)
 
 
 targets_hit = 0  # keeps track of how many targets are clicked
-#delay for setup
 time.sleep(2)
 print("go")
 

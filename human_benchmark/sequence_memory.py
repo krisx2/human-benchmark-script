@@ -1,29 +1,24 @@
-import sys
-import pyautogui
-import keyboard
 import time
-from win32con import MOUSEEVENTF_LEFTDOWN, MOUSEEVENTF_LEFTUP
-from win32api import mouse_event, SetCursorPos
+import keyboard
+import pyautogui
+from pynput.mouse import Controller,Button
 
+mouse = Controller()
 
 
 def click(x, y):
-    SetCursorPos((x, y))
-    mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0)
-    mouse_event(MOUSEEVENTF_LEFTUP, 0, 0)
+    mouse.position = (x, y)
+    mouse.click(Button.left, 1)
 
 
-# delay for setup
 time.sleep(3)
 print("letsgo")
 
-count_of_squares = 1  # tracks the number of tiles to process
-tiles_lit = []  # stores the coordinates of detected tiles
+count_of_squares = 1
+tiles_lit = []
 
-# initial click to start the game
 click(954, 570)
 
-# main loop runs until 'q' is pressed
 while not keyboard.is_pressed('q'):
 
     # list of target tile positions (3x3 grid)
@@ -34,7 +29,7 @@ while not keyboard.is_pressed('q'):
     # loop runs until the required number of tiles are detected
     while len(tiles_lit) < count_of_squares:
         if keyboard.is_pressed("q"):
-            sys.exit()
+            break
 
         # check each position for white pixels (255) and store the positions
         for pos in positions:
@@ -50,6 +45,5 @@ while not keyboard.is_pressed('q'):
         for pos in tiles_lit:
             click(*pos)
 
-    # clear the list of tiles after clicking and delay before the next round
     tiles_lit.clear()
     time.sleep(0.6)
